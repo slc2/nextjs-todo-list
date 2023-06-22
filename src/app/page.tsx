@@ -1,11 +1,15 @@
 import { prisma } from "@/db";
 import Link from "next/link";
 
-prisma.todo.create({ data: {title: "test", complete: false}})
+function getTodos() {
+  return prisma.todo.findMany()
+}
 
 export default async function Home() {
 
-  const todos = await prisma.todo.findMany();
+  // create a first record to see if the list is working
+  //await prisma.todo.create({ data: {title: "test", complete: false}})
+  const todos = await getTodos();
 
   return (
     <>
